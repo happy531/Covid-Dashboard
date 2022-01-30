@@ -1,6 +1,5 @@
-import "../styles/globals.css";
 import "leaflet/dist/leaflet.css";
-import "../styles/Map.css";
+import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;

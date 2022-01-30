@@ -1,4 +1,5 @@
 import Map from "../components/Map";
+import Dashboard from "../components/Dashboard/Dashboard";
 
 export default function Home() {
   return (
@@ -9,9 +10,12 @@ export default function Home() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        borderRadius: "5px",
+        border: "1px solid black",
       }}
     >
       <Map />
+      <Dashboard />
     </div>
   );
 }
