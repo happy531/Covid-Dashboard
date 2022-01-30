@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 import { MapContainer, GeoJSON } from "react-leaflet";
-import data from "../../data/countries.json";
+
+import mapData from "../../data/countries.json";
 
 const countryStyles = {
   fillColor: "#EBECF0",
@@ -10,10 +12,15 @@ const countryStyles = {
 };
 
 const Map = () => {
+  const router = useRouter();
+
   const onEachCountry = (country, layer) => {
     layer.on({
       click: (event) => {
-        console.log(event.sourceTarget.feature.properties.ADMIN);
+        const country =
+          event.sourceTarget.feature.properties.ADMIN.toLowerCase();
+        console.log(country);
+        router.replace(`/${country}`);
       },
     });
   };
@@ -26,11 +33,10 @@ const Map = () => {
     >
       <GeoJSON
         style={countryStyles}
-        data={data.features}
+        data={mapData.features}
         onEachFeature={onEachCountry}
       />
     </MapContainer>
   );
 };
-
 export default Map;
