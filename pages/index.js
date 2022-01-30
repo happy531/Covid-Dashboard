@@ -10,8 +10,6 @@ export default function Home() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: "5px",
-        border: "1px solid black",
       }}
     >
       <Map />
