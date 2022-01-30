@@ -11,14 +11,15 @@ const countryStyles = {
   weight: 1,
 };
 
-const Map = () => {
+const Map = ({ countryInfo }) => {
   const router = useRouter();
+  const { lat, long } = countryInfo;
 
   const onEachCountry = (country, layer) => {
     layer.on({
       click: (event) => {
         const country =
-          event.sourceTarget.feature.properties.ADMIN.toLowerCase();
+          event.sourceTarget.feature.properties.ADMIN.toLowerCase().trim();
         console.log(country);
         router.replace(`/${country}`);
       },
@@ -29,7 +30,7 @@ const Map = () => {
     <MapContainer
       style={{ height: "50%", width: "40%" }}
       zoom={4}
-      center={[52.23, 21]}
+      center={[lat, long]}
     >
       <GeoJSON
         style={countryStyles}

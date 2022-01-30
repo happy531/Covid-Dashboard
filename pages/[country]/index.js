@@ -4,6 +4,7 @@ import axios from "../../axios/axios";
 
 export default function Home({ covidData }) {
   console.log(covidData);
+  const { countryInfo } = covidData;
   return (
     <main
       style={{
@@ -14,7 +15,7 @@ export default function Home({ covidData }) {
         alignItems: "center",
       }}
     >
-      <Map />
+      <Map countryInfo={countryInfo} />
       <Dashboard covidData={covidData} />
     </main>
   );
