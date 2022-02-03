@@ -1,10 +1,15 @@
 import Map from "../../components/Map";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import axios from "../../axios/axios";
+import { useAppContext } from "../../context/AppContext";
+import { useEffect } from "react";
 
 export default function Home({ covidData }) {
-  console.log(covidData);
-  const { countryInfo } = covidData;
+  const { setCovidData } = useAppContext();
+  useEffect(() => {
+    setCovidData(covidData);
+  }, [covidData, setCovidData]);
+
   return (
     <main
       style={{
@@ -15,8 +20,8 @@ export default function Home({ covidData }) {
         alignItems: "center",
       }}
     >
-      <Map countryInfo={countryInfo} />
-      <Dashboard covidData={covidData} />
+      <Map />
+      <Dashboard />
     </main>
   );
 }

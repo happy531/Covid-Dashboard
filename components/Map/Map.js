@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { MapContainer, GeoJSON } from "react-leaflet";
 
 import mapData from "../../data/countries.json";
+import { useAppContext } from "../../context/AppContext";
 
 const countryStyles = {
   fillColor: "#EBECF0",
@@ -11,16 +12,17 @@ const countryStyles = {
   weight: 1,
 };
 
-const Map = ({ countryInfo }) => {
+const Map = () => {
   const router = useRouter();
+  const { countryInfo } = useAppContext();
   const { lat, long } = countryInfo;
+  console.log(countryInfo);
 
   const onEachCountry = (country, layer) => {
     layer.on({
       click: (event) => {
         const country =
           event.sourceTarget.feature.properties.ADMIN.toLowerCase().trim();
-        console.log(country);
         router.replace(`/${country}`);
       },
     });

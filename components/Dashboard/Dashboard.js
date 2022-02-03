@@ -1,24 +1,28 @@
 import React from "react";
 import classes from "./Dashboard.module.scss";
+import { useAppContext } from "../../context/AppContext";
 
-const Dashboard = ({ covidData }) => {
+const Dashboard = () => {
+  const { message, country, cases, deaths, recovered } = useAppContext();
+
   return (
     <div className={classes.dashboard}>
-      {covidData.message ? (
-        covidData.message
+      {message ? (
+        message
       ) : (
         <>
+          <h3>{country}</h3>
           <div className={classes.info}>
             <div className={classes.info__title}>Cases</div>
-            <div className={classes.number}>{covidData.cases}</div>
+            <div className={classes.number}>{cases}</div>
           </div>
           <div className={classes.info}>
             <div className={classes.info__title}>Deaths</div>
-            <div className={classes.number}>{covidData.deaths}</div>
+            <div className={classes.number}>{deaths}</div>
           </div>
           <div className={classes.info}>
             <div className={classes.info__title}>Recovered</div>
-            <div className={classes.number}>{covidData.recovered}</div>
+            <div className={classes.number}>{recovered}</div>
           </div>
         </>
       )}
