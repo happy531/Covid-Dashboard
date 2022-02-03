@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useRouter } from "next/router";
-import { MapContainer, GeoJSON, TileLayer } from "react-leaflet";
+import { MapContainer, GeoJSON, TileLayer, useMapEvent } from "react-leaflet";
 
 import mapData from "../../data/countries.json";
 import { useAppContext } from "../../context/AppContext";
@@ -12,11 +12,23 @@ const countryStyles = {
   weight: 1,
 };
 
+function SetViewOnClick({ animateRef }) {
+  const map = useMapEvent("click", (e) => {
+    map.setView(e.latlng, map.getZoom(), {
+      animate: !animateRef.current || false,
+    });
+  });
+
+  return null;
+}
+
 const Map = () => {
   const router = useRouter();
   const { countryInfo } = useAppContext();
   const { lat, long } = countryInfo;
   console.log(countryInfo);
+
+  const animateRef = useRef(false);
 
   const onEachCountry = (country, layer) => {
     layer.on({
@@ -38,6 +50,7 @@ const Map = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <SetViewOnClick animateRef={animateRef} />
       <GeoJSON
         style={countryStyles}
         data={mapData.features}
