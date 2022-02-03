@@ -11,15 +11,7 @@ export default function Home({ covidData }) {
   }, [covidData, setCovidData]);
 
   return (
-    <main
-      style={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <main>
       <Map />
       <Dashboard />
     </main>
