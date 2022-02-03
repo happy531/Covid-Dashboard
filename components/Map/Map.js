@@ -1,13 +1,13 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { MapContainer, GeoJSON } from "react-leaflet";
+import { MapContainer, GeoJSON, TileLayer } from "react-leaflet";
 
 import mapData from "../../data/countries.json";
 import { useAppContext } from "../../context/AppContext";
 
 const countryStyles = {
   fillColor: "#EBECF0",
-  fillOpacity: 1,
+  fillOpacity: 0,
   color: "black",
   weight: 1,
 };
@@ -34,6 +34,10 @@ const Map = () => {
       zoom={4}
       center={[lat, long]}
     >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
       <GeoJSON
         style={countryStyles}
         data={mapData.features}
