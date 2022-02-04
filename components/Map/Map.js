@@ -26,7 +26,6 @@ const Map = () => {
   const router = useRouter();
   const { countryInfo } = useAppContext();
   const { lat, long } = countryInfo;
-  console.log(countryInfo);
 
   const animateRef = useRef(false);
 
@@ -35,7 +34,9 @@ const Map = () => {
       click: (event) => {
         const country =
           event.sourceTarget.feature.properties.ADMIN.toLowerCase().trim();
-        router.replace(`/${country}`);
+        setTimeout(() => {
+          router.replace(`/${country}`);
+        }, 1);
       },
     });
   };

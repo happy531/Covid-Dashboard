@@ -1,14 +1,48 @@
-import React from "react";
-import classes from "./Dashboard.module.scss";
+import React, { useEffect, useState } from "react";
 import { useAppContext } from "../../context/AppContext";
+
+import { useRouter } from "next/router";
+
+import classes from "./Dashboard.module.scss";
 
 const Dashboard = () => {
   const { message, country, cases, deaths, recovered } = useAppContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleStartLoading = () => {
+      setIsLoading(true);
+    };
+    const handleStopLoading = () => {
+      setIsLoading(false);
+    };
+
+    router.events.on("routeChangeStart", handleStartLoading);
+    router.events.on("routeChangeComplete", handleStopLoading);
+    router.events.on("routeChangeError", handleStopLoading);
+
+    return () => {
+      router.events.off("routeChangeStart", handleStartLoading);
+      router.events.off("routeChangeComplete", handleStopLoading);
+      router.events.off("routeChangeError", handleStopLoading);
+    };
+  }, [router]);
+
+  // Router.onRouteChangeStart = () => {
+  //   console.log("onRouteChangeStart triggered");
+  //   setIsLoading(true);
+  // };
+  //
+  // Router.onRouteChangeComplete = () => {
+  //   console.log("onRouteChangeComplete triggered");
+  //   setIsLoading(false);
+  // };
 
   return (
     <div className={classes.dashboard}>
-      {message ? (
-        message
+      {isLoading ? (
+        <p>loading</p>
       ) : (
         <>
           <h3>{country}</h3>
