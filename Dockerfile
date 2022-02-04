@@ -1,20 +1,8 @@
-FROM node:12
-
-ENV PORT 3000
-
-# Create app directory
-RUN mkdir -p /usr/src/app
+FROM node:14.16.0-alpine3.10
 WORKDIR /usr/src/app
-
-# Installing dependencies
-COPY package*.json /usr/src/app/
+COPY package*.json ./
 RUN npm install
-
-# Copying source files
-COPY . /usr/src/app
-
-# Building app
-RUN npm run build
+COPY . .
+# RUN npm run build // for deployment
 EXPOSE 3000
-
-CMD "npm" "run" "dev"
+CMD ["npm","run","dev"]
