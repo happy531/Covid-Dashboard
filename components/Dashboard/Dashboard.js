@@ -6,6 +6,10 @@ import { useRouter } from "next/router";
 import classes from "./Dashboard.module.scss";
 import LoadingSpinner from "./LoadingSpinner";
 
+function numberWithCommas(x) {
+  if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const Dashboard = () => {
   const { message, country, cases, deaths, recovered } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
@@ -36,18 +40,20 @@ const Dashboard = () => {
         <LoadingSpinner />
       ) : (
         <>
-          <h3>{country}</h3>
+          <div className={classes.country_name}>
+            <h3>{country}</h3>
+          </div>
           <div className={classes.info}>
             <div className={classes.info__title}>Cases</div>
-            <div className={classes.number}>{cases}</div>
+            <div className={classes.number}>{numberWithCommas(cases)}</div>
           </div>
           <div className={classes.info}>
             <div className={classes.info__title}>Deaths</div>
-            <div className={classes.number}>{deaths}</div>
+            <div className={classes.number}>{numberWithCommas(deaths)}</div>
           </div>
           <div className={classes.info}>
             <div className={classes.info__title}>Recovered</div>
-            <div className={classes.number}>{recovered}</div>
+            <div className={classes.number}>{numberWithCommas(recovered)}</div>
           </div>
         </>
       )}

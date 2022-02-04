@@ -16,15 +16,26 @@
     margin: auto;
   }
 
+  .country_name {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    border-bottom: 1px solid grey;
+  }
+
   .info {
     margin-bottom: 20px;
+    border-bottom: 1px solid grey;
 
     &__title {
+      font-size: 1.4rem;
+      letter-spacing: 1px;
       font-weight: 500;
     }
     .number {
       font-size: 1.4rem;
       font-weight: bold;
+      letter-spacing: 1px;
     }
   }
 }
