@@ -4,6 +4,7 @@ import { useAppContext } from "../../context/AppContext";
 import { useRouter } from "next/router";
 
 import classes from "./Dashboard.module.scss";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Dashboard = () => {
   const { message, country, cases, deaths, recovered } = useAppContext();
@@ -29,20 +30,10 @@ const Dashboard = () => {
     };
   }, [router]);
 
-  // Router.onRouteChangeStart = () => {
-  //   console.log("onRouteChangeStart triggered");
-  //   setIsLoading(true);
-  // };
-  //
-  // Router.onRouteChangeComplete = () => {
-  //   console.log("onRouteChangeComplete triggered");
-  //   setIsLoading(false);
-  // };
-
   return (
     <div className={classes.dashboard}>
       {isLoading ? (
-        <p>loading</p>
+        <LoadingSpinner />
       ) : (
         <>
           <h3>{country}</h3>
